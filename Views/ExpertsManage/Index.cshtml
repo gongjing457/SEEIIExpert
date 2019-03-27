@@ -1,0 +1,124 @@
+﻿@model PagedList.StaticPagedList<Expert>
+@{
+    ViewBag.Title = "专家信息列表";
+    Layout = "~/Views/Shared/_LayoutPageExpertsManagement.cshtml";
+}
+
+@using SEEIPro.Models;
+@using PagedList.Mvc;
+
+<link href="~/Content/css/PagedList.css" rel="stylesheet" />
+<link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/base.css" rel="stylesheet" />
+ 
+@if (Model != null)
+{
+    <div class="div-head">
+        关键词：<input type="text" class="input-sm textbox" id="txt_kwds" placeholder="如:教授" title="请输入要查询到的任意关键词！(姓名，职称，单位名称)" />
+        <input type="button" class="btn btn-primary" id="btn_query" value="查询" title="点击查询" />
+        <a class="text-right" href="@Url.Action("OutToExcel", "ExpertsManage")" title="点击到处到excel文件">导出到Excel文件</a>
+    </div>
+    <h3 class="text-center">入库专家信息列表</h3>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>专家序号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>单位名称</th>
+                <th>技术职称</th>
+                <th>入库状态</th>
+                <th>专家图像信息</th>
+                <th>个人主页</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Expert expert in Model)
+            {
+                <tr>
+                    <td>@expert.sId</td>
+                    <td>@expert.eName</td>
+                    <td>@expert.gender</td>
+                    <td>@expert.UnitDetailsOne</td>
+                    <td>@expert.academicTitles</td>
+                    <td>
+                        @foreach (StorageStatu status in @ViewBag.StatusList as List<StorageStatu>)
+                    {
+                        if (expert.beStatus == status.sid)
+                        {   @status.beStatus }
+                    }
+                    </td>
+                    <td>
+                        <a class="alink" href="@Url.Action("Photo", "ExpertsManage", new { id = expert.sId })" title="修改图像文件">修改专家图像</a>
+                    </td>
+                    <td>
+                        @if (expert.personalUrl == null || expert.personalUrl.Length <= 16)
+                        { <a class="alink" href="@Url.Action("Details", "ExpertsManage", new { id=expert.sId})" title="点击前往专家个人主页查看详情">查看详情页</a>  }
+                    else
+                    {
+                            <a class="alink" href="@expert.personalUrl " target="_blank" title="点击前往专家个人主页查看详情">查看相关主页</a> }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "ExpertsManage", new { id = expert.sId })" title="点击编辑专家信息">编辑</a>
+                        <a class="alink" onclick="btnDel(@expert.sId)" title="点击删除专家">删除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table> 
+        <div class="col-sm-6 col-md-6">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "首页", LinkToPreviousPageFormat = "上一页", LinkToNextPageFormat = "下一页", LinkToLastPageFormat = "尾页", DisplayLinkToFirstPage = PagedListDisplayMode.Always, DisplayLinkToLastPage = PagedListDisplayMode.Always, DisplayLinkToNextPage = PagedListDisplayMode.Always, DisplayLinkToPreviousPage = PagedListDisplayMode.Always, MaximumPageNumbersToDisplay =3 })
+        </div>
+        <div class="col-sm-6 col-md-6">
+            每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页,共 @Model.Count 条记录
+            @Html.PagedListGoToPageForm((PagedList.IPagedList)Model, "Index", new GoToFormRenderOptions { LabelFormat = "跳转到：" })
+        </div>
+   
+}
+else
+{
+    <h3 class="text-center">入库专家信息列表</h3>
+    <p class="text-danger">没有内容！</p>
+}
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        //模糊查询
+        $("#btn_query").click(function () {
+            var kwd = $.trim($("#txt_kwds").val());
+            if (kwd == "" || kwd.length == 0) {
+                alert("请输入要查询的关键词！");
+            } else {
+                window.location = "/ExpertsManage/Index?search=" + kwd;
+            }
+        }); 
+    });
+            
+    //删除专家
+    function btnDel(sid) {
+        if (confirm("您确定要删除该专家吗？")) {
+            $.ajax({
+                type: "GET",
+                url: "/ExpertsManage/Delete?id=" + sid,
+                datatype: "json",
+                success: function (result) {
+                    result = JSON.parse(result);
+                    if (result.status == 'ok') {
+                        alert(result.msg);
+                        window.location = "/ExpertsManage/Index";
+                    } else {
+                        alert(result.msg);
+                        return false;
+                    }
+                },
+                error: function (xhr) {
+                    alert("删除出现异常，请稍后重试！" + xhr.responsetext);
+                }
+            });
+        } else { return false; }
+    }
+
+
+</script>

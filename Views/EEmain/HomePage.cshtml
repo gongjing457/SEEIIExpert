@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_LayoutPageTopMain.cshtml";
+}
+
+<link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<style>
+    .panel .panel-body .brief {
+        line-height: 40px;
+    }
+
+    .thumbnail > img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .tb_container {
+        text-align: center;
+    }
+
+    #title_hint {
+        color: #808080;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">智库简介</h3></div>
+            <div class="panel-body">
+                <p class="brief">&nbsp;&nbsp;&nbsp;&nbsp;南方教育装备产业发展智库是由江门市蓬江区南方教育装备创新研究院负责建设的教育装备高端专家智库，是在教育部教育装备研究与发展中心指导下、江门市蓬江区人民政府的支持下建立的，集产业规划、技术研发、技术指导与咨询、人才培养、科技评估于一体的专家智库。上半年成功邀请了分别来自美国马里兰大学、澳大利亚格里菲斯大学、华中科技大学、南京师范大学、华南师范大学等国内外高等院校、研究机构专家学者进入产业发展智库。</p>
+                <p class="brief">&nbsp;&nbsp;&nbsp;&nbsp; 截止目前，共近50名国内外专家与顾问进入智库，其中包括"国家青年千人计划"一位。</p>
+            </div>
+        </div>
+        <div class="tb_container">
+            <iframe align="middle" src="//www.seniverse.com/weather/weather.aspx?uid=UAEF59FBC2&cid=CHGD100500&l=zh-CHS&p=SMART&a=1&u=C&s=5&m=2&x=1&d=3&fc=&bgc=&bc=&ti=0&in=1&li=" frameborder="0" scrolling="no" height="300" allowTransparency="true"></iframe>
+        </div>
+
+    </div>
+    <div class="row col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">专家风采<span id="title_hint">（已入库专家共计&nbsp;<span class="text-danger">@ViewData["total"]</span>&nbsp;人，排名不分先后）</span></h3></div>
+            <div class="panel-body">
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/eczx.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：曹志祥</p>
+                        <p> 技术职称：主任</p>
+                        <p> 研究领域：基础教育</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/eljk.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：李津逵</p>
+                        <p> 技术职称：主任研究员</p>
+                        <p> 研究领域：城市经营</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/eljb.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：刘俊波</p>
+                        <p> 技术职称：副研究员</p>
+                        <p> 研究领域：生物教育装备</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/ezjz.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：张景中</p>
+                        <p> 技术职称：院士、教授</p>
+                        <p> 研究领域：数学教育技术</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/ephg.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：彭红光</p>
+                        <p> 技术职称：主任</p>
+                        <p> 研究领域：教育信息规划</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/eyxw.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：袁小伟</p>
+                        <p> 技术职称：博士、教授</p>
+                        <p> 研究领域：人机交互，用户研究</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/eyhw.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：叶惠文</p>
+                        <p> 技术职称：教授</p>
+                        <p> 研究领域：现代教育技术支撑环境研究</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/Content/xiaoyicun/eal.jpg" alt="暂无图片">
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：艾伦</p>
+                        <p> 技术职称：教授</p>
+                        <p> 研究领域：教育技术装备</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6"><input type="button" class="btn btn-primary" id="btn_more" value="查看更多" title="点击查看更多专家信息！" /></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#btn_more").click(function () {
+            window.location = "/EEmain/ExpertProfile";
+        });
+    });
+</script>

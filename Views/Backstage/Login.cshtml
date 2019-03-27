@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>专家智库管理系统登录</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/images/favico.ico" />
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/BigInt.js"></script>
+    <script src="~/Scripts/RSA.js"></script>
+    <script src="~/Scripts/Barrett.js"></script>
+
+    <!--[if IE]>
+        <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper" class="login-page">
+        <div class="text-center"><h4>南方教育装备产业发展智库V1.0</h4></div>
+        <div id="login_form" class="form">
+            <form class="login-form">
+                <input type="text" class="form-control" id="user_name" title="用户名" placeholder="用户名" />
+                <input type="password" class="form-control" id="password" title="密码" placeholder="密码" />
+                <input type="text" class="textbox" id="inputValiedateCode" placeholder="验证码，区分大小写!" title="输入验证码！" />
+                <img  src="/Utils/ValidateImgCode.ashx" onclick="this.src='/Utils/ValidateImgCode.ashx?'+Math.random()" id="validate_img" title="如看不清单击切换验证码！" />
+                <button type="button" class="btn btn-primary" id="login" title="点击登陆">登　录</button>
+                <button type="button" class="btn btn-danger" id="cancel" title="取消返回首页">取    消</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var pubkey = "";
+    /*login*/
+    $(function () {
+        /*public key*/
+        $.ajax({
+            type: "get",
+            url: "/Backstage/GetRsaKey",
+            cache: false,
+            datatype: 'json',
+            success: function (result) {
+                result = JSON.parse(result);
+                if (result.status == 'ok') {
+                    pubkey = result.publickey;
+                } else { alert("请求公钥时出现故障，请稍后再试！"); }
+            },
+            error: function () { alert("请求出现异常，请稍后再试！"); }
+        });
+
+        $("#login").click(function () {
+            var name = $.trim($("#user_name").val());
+            var pass = $.trim($("#password").val());
+            var valicode = $.trim($("#inputValiedateCode").val());
+            if (name == "" || pass == "" || name.length == 0 || pass.length == 0) {
+                alert("请输入用户名或者密码！"); return false;
+            } else if (valicode == "" || valicode.length == 0) {
+                alert("请输入正确的验证码！");
+                return false;
+            }
+            else {
+                var enpwd = rsaEncrypt(pass);
+                if (enpwd.length>0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Backstage/Handler",
+                        data: { "username": name, "passpwd": enpwd, "validatecode": valicode },
+                        datatype: 'json',
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status == "ok") {
+                                alert(data.msg);
+                                window.location = "/ExpertsManage/Index";
+                            } else {
+                                alert(data.msg);
+                                RefreshCode();
+                            }
+                        },
+                        error: function (xhr) {
+                            alert("出现错误，请稍后再试：" + xhr.responseText);
+                        }
+                    });
+                }
+            }
+        });
+        /*encry pwd string*/
+        function rsaEncrypt(pwd) {
+            setMaxDigits(129);
+            var rsakey = new RSAKeyPair(pubkey.split(",")[0], "", pubkey.split(",")[1]);
+            var pwdencry = encryptedString(rsakey, pwd);
+            return pwdencry;
+        }
+
+        $("#cancel").click(function () {
+            window.location = "/EEmain/HomePage";
+        });
+    });
+    /*Refresh Validate Code*/
+    function RefreshCode() {
+        window.location = "/Backstage/Login";
+    }
+   
+</script>

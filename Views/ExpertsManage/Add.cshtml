@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = "添加专家";
+    Layout = "~/Views/Shared/_LayoutPageExpertsManagement.cshtml";
+}
+
+@using SEEIPro.Models;
+
+<link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Scripts/kindeditor/plugins/code/prettify.css" rel="stylesheet" />
+<link href="~/Scripts/kindeditor/themes/default/default.css" rel="stylesheet" />
+<link href="~/Content/css/base.css" rel="stylesheet" />
+@*<link href="~/Content/css/AddExperts.css" rel="stylesheet" />*@
+<div class="container-fluid">
+    <h3 class="text-center">录入专家信息</h3>
+    <form>
+        <div class="panel panel-default">
+            <div class="panel-heading">基本信息</div>
+            <div class="panel-body">
+
+                <label class="control-label" for="expid">专家编号<span class="text-danger">*</span> </label><input type="text" class="form-control" id="expid" value="07502018080812345" placeholder="请填写17位专家编号" title="具体编码规则：第1-4位为年度代码，如“2016”；第5-7位为专业技术职务代码，如：教授“011”；第8位为研究院专家来源固定代码；第9-13位为单位代码；第14-17位为人员代码。" />
+
+                <label class="control-label" for="expname">姓名<span class="text-danger">*</span></label><input type="text" class="form-control" id="expname" placeholder="请填写专家姓名" />
+
+                <label class="control-label" for="expgender">性别<span class="text-danger">*</span></label><select class="form-control" id="expgender" title="请选择性别！">
+                    <option value="男" selected>男</option>
+                    <option value="女">女</option>
+                </select>
+
+                <label class="control-label" for="expimginfo">上传专家图像</label>
+                <input type="text" class="form-control" id="inputimgurl" placeholder="图片路径" readonly />
+                <input type="button" id="expimginfo" value="选择图像文件" style="display:none;" />
+                <p class="help-block">注：上传图像像素大小130*130px为佳，且大小不超过1M。当前像素：<span id="imgpxinfo" style="color:red;">0</span>px</p>
+
+                <label class="control-label" for="expbirthdate">出生日期</label> <input type="text" class="form-control" id="expbirthdate" placeholder="请填写出生日期" onclick="WdatePicker({ minDate: '1900-01-01', maxDate: '%y-%M-%d' })" readonly />
+
+                <label class="control-label" for="expidentitynumber">身份证号</label>  <input type="text" class="form-control" id="expidentitynumber" placeholder="请填写18位身份证号" />
+
+                <label class="control-label" for="exptechtitles">技术职称</label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="exptechtitles" placeholder="请填写技术职称" />
+                </div>
+
+                <label class="control-label" for="unitproperty">单位性质</label>
+                <div class="controls">
+                    <select class="form-control" id="unitproperty" title="请选择单位性质">
+                        @foreach (var item in ViewBag.UnitList as List<UnitProperty>)
+                        {
+                            <option value="@item.id">@item.unitProperties</option>
+                        }
+                    </select>
+                </div>
+
+                <label class="control-label" for="expunitname">单位名称</label>  <input type="text" class="form-control" id="expunitname" placeholder="请填写单位名称" />
+
+                <label class="control-label" for="expdepartment">所在部门</label>  <input type="text" class="form-control" id="expdepartment" placeholder="请填写所在部门" />
+
+                <label class="control-label" for="expposition">担任职务</label>  <input type="text" class="form-control" id="expposition" placeholder="请填写所担任职务" />
+
+                <div class="accordion" id="accordion-units">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="btn-link" data-toggle="collapse" data-parent="#accordion-units" href="#accordion-unit-one" aria-expanded="true" aria-controls="accordion-element-677851">单位信息二（可选）</a>
+                        </div>
+                        <div id="accordion-unit-one" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <label> 单位名称</label><input type="text" class="textbox" id="expunitnameone" placeholder="单位名称二" />
+                                <label>所在部门</label><input type="text" class="textbox" id="expunitdepartone" placeholder="所在部门二" />
+                                <label>担任职务</label><input type="text" class="textbox" id="expunitpositionone" placeholder="所担任职务二" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="btn-link" data-toggle="collapse" data-parent="#accordion-units" href="#accordion-unit-two">单位信息三（可选）</a>
+                        </div>
+                        <div id="accordion-unit-two" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <label>单位名称</label><input type="text" class="textbox" id="expunitnametwo" placeholder="单位名称三" />
+                                <label>所在部门</label><input type="text" class="textbox" id="expunitdeparttwo" placeholder="所在部门三" />
+                                <label>担任职务</label><input type="text" class="textbox" id="expunitpositiontwo" placeholder="所担任职务三" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label class="control-label" for="expcategory">业务分类<span class="text-danger">*</span></label>
+                <div class="controls">
+                    <label class="checkbox-inline"><input type="checkbox" name="category" value="①规划产业发展方向与战略" />①规划产业发展方向与战略</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="category" value="②技术引进与研发" />②技术引进与研发</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="category" value="③技术指导与咨询" />③技术指导与咨询</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="category" value="④赛事评审、科技评估" />④赛事评审、科技评估</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="category" value="⑤人才引进与培养" />⑤人才引进与培养</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="category" value="⑥制定教育装备共性标准" />⑥制定教育装备共性标准</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="category" value="⑦提供创新创业服务" />⑦提供创新创业服务</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">联系方式</div>
+            <div class="panel-body">
+                <label class="control-label" for="exptelephone">办公电话<span class="text-danger">*</span></label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="exptelephone" placeholder="请填写办公电话" value="07503699695" />
+                </div>
+
+                <label class="control-label" for="expcellphone">移动电话<span class="text-danger">*</span></label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="expcellphone" placeholder="请填写移动电话" value="13888888888" />
+                </div>
+
+                <label class="control-label" for="expemail">邮箱<span class="text-danger">*</span></label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="expemail" placeholder="请填写邮箱" value="jyzbyjy@126.com" />
+                </div>
+                <label class="control-label" for="expmailaddress">通信地址<span class="text-danger">*</span></label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="expmailaddress" placeholder="请填写通信地址" value="广东省江门市蓬江区群华路15号" />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">专家学术情况</div>
+            <div class="panel-body">
+                <label class="control-label" for="expfileds">从事领域，如有多个研究方向，请用分号“;”隔开<span class="text-danger">*</span></label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="expfileds" placeholder="请填写从事领域，如有多个研究方向，请用分号“;”隔开" />
+                </div>
+                <label class="control-label" for="exppersonalpage">相关主页</label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="exppersonalpage" placeholder="可填写第三方网站相关个人主页链接" />
+                </div>
+                <label class="control-label" for="expbrief">个人简介(请写清主要管理业务、研究方向)</label>
+                <div class="controls">
+                    <textarea class="form-control multitext" id="expbrief" placeholder="没有任何业务及研究方向！">没有任何业务及研究方向！</textarea>
+                </div>
+                <p class="help-block">注：字数请控制在300字以内！累计已输入<span class="text-danger" id="brf_count">0</span>个文字</p>
+                <label class="control-label" for="expexperience">主要工作经历</label>
+                <div class="controls">
+                    <textarea class="form-control multitext" id="expexperience" placeholder="没有任何工作经历！">没有任何工作经历！</textarea>
+                </div>
+                <p class="help-block">注：字数请控制在300字以内！累计已输入<span class="text-danger" id="exp_count">0</span>个文字</p>
+                <label class="control-label" for="expachievement">主要工作业绩(包括承担项目、成果、专利、著作、论文、研究报告、获奖情况等)</label>
+                <div class="controls">
+                    <textarea class="form-control multitext" id="expachievement" placeholder="没有任何业绩！">没有任何业绩！</textarea>
+                </div>
+                <p class="help-block">注：字数请控制在300字以内！累计已输入<span class="text-danger" id="achi_count">0</span>个文字</p>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">其他信息</div>
+            <div class="panel-body">
+                <label class="control-label" for="expstatus">入库状态<span class="text-danger">*</span></label>
+                <div class="controls">
+                    <select class="form-control" id="expstatus">
+                        @foreach (var item in ViewBag.StatusList as List<StorageStatu>)
+                        {
+                            <option value="@item.sid">@item.beStatus</option>
+                        }
+                    </select>
+                </div>
+                <label class="control-label" for="expsource">专家来源</label>
+                <div class="controls">
+                    <input type="text" class="form-control" id="expsource" placeholder="请填写专家来源" />
+                </div>
+                <label class="control-label" for="expremark">备注</label>  <input type="text" class="form-control" id="expremark" placeholder="如有其他特别情况请注明" />
+            </div>
+        </div>
+
+        <div class="pager">
+            <input type="button" class="btn btn-primary" id="btnSave" title="点击保存专家信息" value="保存" />
+            <input type="reset" class="btn btn-danger" id="btnCancel" title="清空已填信息" value="清空" />
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/Scripts/kindeditor/plugins/code/prettify.js"></script>
+<script src="~/Scripts/kindeditor/lang/zh-CN.js"></script>
+<script src="~/Scripts/kindeditor/plugins/filemanager/filemanager.js"></script>
+<script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+<script src="~/Scripts/addexpert.js"></script>

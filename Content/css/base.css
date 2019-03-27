@@ -1,0 +1,46 @@
+﻿
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Microsoft YaHei";
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: blue;
+        background: #DCDCDC;
+    }
+
+.div-head {
+    padding: 20px;
+    /*text-align: center;*/
+}
+
+.panel .panel-heading {
+    background-color: #D3D3D3 !important;
+}
+
+.multitext {
+    background-color: #F5F5F5;
+    min-height: 100px;
+    max-height: 300px;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.textbox {
+    width: 120px;
+}
+ 
+.table tbody tr:hover {
+    background: #DCDCDC;
+}
+
+.btn {
+    width: 120px;
+    font-size: 16px; 
+}

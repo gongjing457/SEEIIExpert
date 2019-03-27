@@ -1,0 +1,215 @@
+﻿@model PagedList.StaticPagedList<Expert>
+
+@{
+    ViewBag.Title = "专家附件上传";
+    Layout = "~/Views/Shared/_LayoutPageExpertsManagement.cshtml";
+}
+
+@using SEEIPro.Models;
+@using PagedList.Mvc;
+<link href="~/Content/css/PagedList.css" rel="stylesheet" />
+<link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/base.css" rel="stylesheet" />
+<link href="~/Scripts/kindeditor/themes/default/default.css" rel="stylesheet" />
+<div class="container-fluid">
+    <h3 class="text-center">专家附件上传</h3>
+    @if (Model != null)
+    {
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr><th>专家编号</th><th>专家姓名</th><th>专家登记表</th><th>专家聘书</th><th>上传登记表</th><th>上传专家聘书</th><th>职称</th><th>删除</th> </tr>
+            </thead>
+            <tbody>
+                @{
+                    var nohave = "未上传";
+                    var ishave = "查看文件";
+                }
+                @foreach (Expert expt in Model)
+                {
+                    <tr>
+                        <td>@expt.eId</td>
+                        <td>@expt.eName </td>
+
+                        <td>
+                            @if (expt.registrationForm == null || expt.registrationForm.Length < 5)
+                            {  <span style="color:orangered;">  @nohave </span> }
+                            else
+                            {
+                                <span style="color:blue;"> <a class="btn-link" href="@Url.Action("FileDownload", "ExpertsManage", new { id = expt.sId,type="register" })" target="_blank" title="点击下载文件">  @ishave </a>   </span>
+                            }
+                        </td>
+                        <td>
+                            @if (expt.appointmentBook == null || expt.appointmentBook.Length < 5)
+                            {  <span style="color:orangered;">  @nohave  </span>  }
+                            else
+                            {
+                                <span style="color:blue;"><a class="btn-link" href="@Url.Action("FileDownload", "ExpertsManage", new { id = expt.sId,type="certificate" }) " target="_blank" title="点击下载文件">  @ishave </a>   </span>
+                            }
+                        </td>
+                        <td>
+                            <!--Modal Button-->
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="GetEid(@expt.sId)" data-expertid="@expt.sId">开始上传</button>
+                            @*<input type="button" id="btnRegister" title="点击上传专家登记表" data-expertid="@expt.sId" value="上传登记表" hidden />*@
+                        </td>
+                        <td>
+                            @*<input type="button" id="" title="点击上传专家聘书" data-expertid="@expt.sId" value="上传聘书" hidden />*@
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#shModal" onclick="GetEid(@expt.sId)" data-expertid="@expt.sId">开始上传</button>
+
+                        </td>
+                        <td> @expt.academicTitles   </td>
+                        <td><a onclick="btnDelete(@expt.sId);return false;" title="点击删除将删除该专家的所有文件">删除文件</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <div class="text-center">
+            每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页,共 @Model.Count 条记录
+            @Html.PagedListPager(Model, page => Url.Action("Upload", new { page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "首页", LinkToPreviousPageFormat = "上一页", LinkToNextPageFormat = "下一页", LinkToLastPageFormat = "尾页", DisplayLinkToFirstPage = PagedListDisplayMode.Always, DisplayLinkToLastPage = PagedListDisplayMode.Always, DisplayLinkToNextPage = PagedListDisplayMode.Always, DisplayLinkToPreviousPage = PagedListDisplayMode.Always, MaximumPageNumbersToDisplay = 5 })
+        </div>
+                    }
+                    else
+                    {
+                        <p class="text-danger">没有内容！</p>
+                    }
+    <!--Modal-->
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><a class="close btnclose" data-dissmiss="modal">&times;</a><h4 class="modal-title" id="myModalLabel">上传专家登记表</h4></div>
+                <div class="modal-body">
+                    <input type="button" id="btnRegister" title="点击选择文件" value="选择文件" hidden />
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-primary btnclose" data-dissmiss="modal">关闭</button></div>
+            </div>
+        </div>
+    </div>
+    <!--/Modal-->
+    <!--Modal-->
+    <div class="modal fade" id="shModal" role="dialog" aria-labelledby="shModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><a class="close btnclose" data-dissmiss="modal">&times;</a><h4 class="modal-title" id="shModalLabel">上传专家聘书</h4></div>
+                <div class="modal-body">
+                    <input type="button" id="btnAppointment" title="点击选择文件" value="选择文件" hidden />
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-primary btnclose" data-dissmiss="modal">关闭</button></div>
+            </div>
+        </div>
+    </div>
+    <!--/Modal-->
+</div>
+<script src="~/Scripts/bootstrap/js/jquery-2.0.0.min.js"></script>
+<script src="~/Scripts/bootstrap/js/bootstrap.js"></script>
+<script src="~/Scripts/kindeditor/kindeditor-all.js"></script>
+<script src="~/Scripts/kindeditor/plugins/code/prettify.js"></script>
+<script src="~/Scripts/kindeditor/lang/zh-CN.js"></script>
+<script src="~/Scripts/kindeditor/plugins/filemanager/filemanager.js"></script>
+<script>
+    var eid;
+    $(function () {
+        KindEditor.ready(function (K) {
+            var uploadregistbutton = K.uploadbutton({
+                button: K("#btnRegister")[0],
+                fieldName: "expertFile",
+                url: "../Scripts/kindeditor/upload/upload_json.ashx?dir=file&type=Registration",
+                afterUpload: function (data) {
+                    if (data.error == 0) {
+                        var url = K.formatUrl(data.url, "absolute");
+                        alert("URL:" + url);
+                        $.ajax({
+                            type: "POST",
+                            url: "/ExpertsManage/UploadRegister?id=" +eid,
+                            data: { "dirpath": url },
+                            success: function (res) {
+                                res = JSON.parse(res);
+                                if (res.status == "ok") {
+                                    alert("该专家的登记表已经上传成功!");
+                                    window.location = "/ExpertsManage/Upload";
+                                } else if (res.status == "no") {
+                                    alert("上传文件路径保存失败，请稍后重试！");
+                                } else {
+                                    alert("上传失败，请稍后重试！");
+                                }
+                            },
+                            error: function (xhr) {
+                                alert("上传出现异常，请稍后重试！" + xhr.responsetext);
+                            }
+                        });
+                    } else { alert(data.message); }
+
+                }, afterError: function (str) {
+                    alert("登记表上传的过程中出现异常，请确认要上传的文件，稍后重试！" + str.responsetext);
+                }
+            });
+            uploadregistbutton.fileBox.change(function (e) {
+                uploadregistbutton.submit();
+            });
+        });
+        KindEditor.ready(function (K) {
+            uploadappointbutton = K.uploadbutton({
+                button: K("#btnAppointment")[0],
+                fieldName: "expertFile",
+                url: "../Scripts/kindeditor/upload/upload_json.ashx?dir=file&type=Appointment",
+                afterUpload: function (data) {
+                    if (data.error == 0) {
+                        var url = K.formatUrl(data.url, "absolute");
+                        $.ajax({
+                            type: "POST",
+                            data: { "dirpath": url },
+                            url: "/ExpertsManage/UploadAppointment?id=" +eid,     
+                            success: function (res) {
+                                res = JSON.parse(res);
+                                if (res.status == "ok") {
+                                    alert("该专家的聘书已经上传成功!");
+                                    window.location = "/ExpertsManage/Upload";
+                                } else if (res.status == "no") {
+                                    alert("上传文件路径保存失败，请稍后重试！");
+                                } else {
+                                    alert("上传失败，请稍后重试！");
+                                }
+                            },
+                            error: function (xhr) {
+                                alert("上传出现异常，请稍后重试！" + xhr.responsetext);
+                            }
+                        });
+                    } else { alert(data.message); }
+                }, afterError: function (str) {
+                    alert("专家聘书上传的过程中出现异常，错误信息：" + str);
+                }
+            });
+            uploadappointbutton.fileBox.change(function (e) {
+                uploadappointbutton.submit();
+            });
+        });
+        $(".btnclose").click(function () {
+            $("#shModal").modal('hide');
+            $("#myModal").modal('hide');
+        });
+    });
+    function GetEid(id) {
+        eid = id;
+    }
+    function btnDelete(id) {
+        if (confirm("您确定要删除该专家的所有文件吗?")) {
+            $.ajax({
+                type: "POST",
+                url: "/ExpertsManage/Del?sid=" + id,
+                success: function (res) {
+                    res = JSON.parse(res);
+                    if (res.status == "ok") {
+                        alert("该专家的文件资料已经删除成功!");
+                        window.location = "/ExpertsManage/Upload";
+                    } else if (res.status == "no") {
+                        alert("删除文件可能不存在，请确认后重试！");
+                    } else {
+                        alert("删除失败，请稍后重试！");
+                    }
+                },
+                error: function (xhr) {
+                    alert("删除过程中出现异常，请稍后重试！" + xhr.responsetext);
+                }
+            });
+        }
+    }
+</script>

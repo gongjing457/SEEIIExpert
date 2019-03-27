@@ -1,0 +1,56 @@
+﻿@model PagedList.StaticPagedList<Expert>
+@{
+    ViewBag.Title = "ExpertProfile";
+    Layout = "~/Views/Shared/_LayoutPageTopMain.cshtml";
+}
+
+@using SEEIPro.Models;
+@using PagedList.Mvc;
+ 
+<div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">南方教育装备产业发展智库特聘专家<span  style="color:#808080">（排名不分先后）</span></h3></div>
+    <div class="panel-body">
+        @if (Model != null)
+        {
+            foreach (Expert expert in Model)
+            {
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        @if (!String.IsNullOrEmpty(expert.img))
+                    {
+                            <img src="@expert.img" width="130" height="130" alt="图片加载失败">
+                        }
+                        else
+                        {   <img src="~/Content/xiaoyicun/obama.jpg" width="130" height="130" alt="暂无图片"> }
+                    </div>
+                    <div class="caption">
+                        <p> 姓名：@expert.eName &nbsp;&nbsp; 技术职称：@expert.academicTitles</p>
+                   
+                        <p title="@expert.field">
+                            研究领域：
+                            @if (expert.field.Length > 20)
+                            {
+                                var field = "";
+                                field = expert.field.Substring(0, expert.field.IndexOf(";") + 1) + "...";
+                                @field
+                            }
+                            else
+                            {
+                                @expert.field
+                            }
+                        </p>
+                    </div>
+                </div>
+            }
+            <div class="col-sm-6 col-md-6">
+                @Html.PagedListPager(Model, page => Url.Action("ExpertProfile", new { page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "首页", LinkToPreviousPageFormat = "上一页", LinkToNextPageFormat = "下一页", LinkToLastPageFormat = "尾页", DisplayLinkToFirstPage = PagedListDisplayMode.Always, DisplayLinkToLastPage = PagedListDisplayMode.Always, DisplayLinkToNextPage = PagedListDisplayMode.Always, DisplayLinkToPreviousPage = PagedListDisplayMode.Always, MaximumPageNumbersToDisplay = 3 })
+            </div>
+            <div class="col-sm-6 col-md-6">
+                每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页,共 @Model.Count 条记录
+                @Html.PagedListGoToPageForm((PagedList.IPagedList)Model, "ExpertProfile", new GoToFormRenderOptions { LabelFormat = "跳转到：" })
+            </div>
+        }
+        else
+        { <p class="text-danger">暂无专家信息！</p> } 
+    </div>
+</div> 

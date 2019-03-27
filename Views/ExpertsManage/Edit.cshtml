@@ -1,0 +1,243 @@
+﻿@model SEEIPro.Models.Expert
+
+@{
+    ViewBag.Title = "编辑专家信息";
+    Layout = "~/Views/Shared/_LayoutPageExpertsManagement.cshtml";
+}
+
+@using SEEIPro.Models;
+
+<link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/base.css" rel="stylesheet" />
+<div class="container-fluid">
+    <h3 class="text-center">编辑专家信息</h3>
+    @using (Html.BeginForm("Edit", "ExpertsManage", FormMethod.Post))
+    {
+        //Expert expert = (Expert)ViewData["exptinfo"];
+        if (Model != null)
+        {
+            <input type="hidden" name="sid" value="@Model.sId" />
+            <div class="panel panel-default">
+                <div class="panel-heading">基本信息</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label">专家编号<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input class="form-control" type="text" name="eId" title="修改专家编号" value="@Model.eId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">姓名<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input class="form-control" type="text" name="eName" title="修改姓名" value="@Model.eName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">性别<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <select class="form-control" name="gender" title="选择性别">
+                                @if (Model.gender.Equals("男"))
+                                {
+                                <option selected="selected" value="男">男</option>
+                                }
+                                else
+                                {
+                                <option value="男">男</option>
+                                }
+                                @if (Model.gender.Equals("女"))
+                                {
+                                <option selected="selected" value="女">女</option>
+                                }
+                                else
+                                {
+                                <option value="女">女</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">出生日期</label>
+                        <div class="controls">
+                            <input class="form-control" type="text" name="birthDay" title="请选择出生日期" value="@Convert.ToDateTime(Model.birthDay).ToShortDateString()" onclick="WdatePicker({ mindate: '1900-01-01', maxdate: '%y-%M-%d' })" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">身份证号</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="identityNumber" title="修改18位身份证号" value="@Model.identityNumber" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">技术职称</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="academicTitles" title="修改技术职称" value="@Model.academicTitles" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">单位性质</label>
+                        <div class="controls">
+                            <select name="unitProperty" class="form-control" title="请选择单位性质(注：所填第一个单位性质)！">
+                                @foreach (UnitProperty unit in @ViewBag.UnitList as List<UnitProperty>)
+                                {
+                                    if (unit.id == Model.unitProperty)
+                                    {
+                                <option selected="selected" value="@unit.id">@unit.unitProperties</option>
+                                    }
+                                    else
+                                    {
+                                <option value="@unit.id">@unit.unitProperties</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">单位信息</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="UnitDetailsOne" title="主要单位信息" value="@Model.UnitDetailsOne" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">单位二(名称; 部门;职务)</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="UnitDetailsTwo" title="可选填单位信息" value="@Model.UnitDetailsTwo" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">单位三(名称;部门;职务)</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="UnitDetailsThree" title="可选填单位信息" value="@Model.UnitDetailsThree" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">业务分类<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="Categories" title="修改业务分类" value="@Model.Categories" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">联系方式</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label">办公电话<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="officePhone" title="修改办公电话" value="@Model.officePhone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">移动电话<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="cellPhone" title="修改移动电话" value="@Model.cellPhone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">邮箱<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="email" title="修改邮箱" value="@Model.email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">通讯地址<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="postalAddress" title="修改通信地址" value="@Model.postalAddress" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">专家学术情况</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label">从事领域<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="field" title="修改专家从事领域" value="@Model.field" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">相关主页</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="personalUrl" title="修改专家相关主页" value="@Model.personalUrl" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">个人简介(请写清主要管理业务、研究方向，300字以内)</label>
+                        <div class="controls">
+                            <textarea class="form-control multitext" name="expertIntroduction" title="专家个人的业务以及研究方向简介">@Model.expertIntroduction</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">主要工作经历(300字以内)</label>
+                        <div class="controls">
+                            <textarea class="form-control multitext" name="expertworkingExperience" title="主要工作经历">@Model.expertworkingExperience</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">主要工作业绩(包括承担项目、成果、专利、著作、论文、研究报告、获奖情况等，100字以内)</label>
+                        <div class="controls">
+                            <textarea class="form-control multitext" name="expertAchievement" title="主要工作业绩">@Model.expertAchievement</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">其他信息</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label">专家来源</label>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="expertSources" title="修改专家来源" value="@Model.expertSources" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">入库状态<span class="text-danger">*</span></label>
+                        <div class="controls">
+                            <select class="form-control" name="beStatus" title="请选择入库状态!">
+                                @foreach (StorageStatu status in @ViewBag.statusList as List<StorageStatu>)
+                                {
+                                    if (status.sid == Model.beStatus)
+                                    {
+                                        <option selected="selected" value="@status.sid">@status.beStatus</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@status.sid">@status.beStatus</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">备注</label>
+                        <div class="controls">
+                            <input class="form-control" type="text" name="remark" title="修改备注说明" value="@Model.remark" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="pager">
+                    <div class="controls">
+                        <input class="btn btn-primary" type="submit" title="点击确认，保存修改信息" value="确认修改" />
+                        <input class="btn btn-danger" type="button" title="取消信息编辑，返回专家列表" value="取消返回" id="btnCancel" />
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        { <p class="text-danger">没有内容！</p> }
+    }
+</div>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnCancel").click(function () {
+            if (confirm("您确定取消修改该专家信息吗？")) {
+                window.location = "/ExpertsManage/Index";//cancel
+            } else { return false; }
+        });
+
+    });
+</script>

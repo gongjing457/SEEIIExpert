@@ -1,0 +1,101 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Microsoft YaHei';
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+ 
+.top {
+    padding: 15px 10px;
+    min-width: 1280px;
+    line-height: 40px;
+    color: white;
+    background-color: #123456;
+}
+
+    .top a {
+        color: white;
+        text-decoration: none;
+    }
+
+        .top a:hover {
+            background-color: #F5F5F5;
+            text-decoration: none;
+            color: blue;
+        }
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+.text-right {
+    float: right;
+    display: inline-block;
+}
+
+.div_left {
+    padding-top: 80px;
+    width: 240px;
+    float: left;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+    .div_left ul {
+        margin: 0 auto;
+        padding: 0;
+        height: 400px;
+        width: 200px;
+        list-style-type: none;
+    }
+
+        .div_left ul li {
+            margin-top: 30px;
+            padding: 10px 2px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+            .div_left ul li a {
+                font-family: "微软雅黑";
+                text-decoration: none;
+                color: #000000;
+            }
+
+
+                .div_left ul li a:hover {
+                    border: 1px solid #BEBEBE;
+                    color: blue;
+                }
+
+
+            .div_left ul li span {
+                width: 5px;
+                display: block;
+                margin-left: 5px;
+                margin-right: 5px;
+                float: left;
+            }
+
+image {
+    border: 0 none;
+}
+
+.div_right {
+    margin-left: 240px;
+    min-height: 600px;
+    min-width: 1000px;
+    display: block;
+}
+.div_footer {
+   padding: 15px;
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    background-color: #DCDCDC;
+}

@@ -1,0 +1,15 @@
+﻿.panel {
+    margin: 40px auto;
+    width: 100%;
+    /*min-height: 400px;*/
+    overflow: hidden;
+    font-family: 'Microsoft YaHei';
+    color: #4F4F4F;
+    font-size: 16px;
+}
+
+    .panel .panel-body p {
+        line-height: 40px;
+    }
+
+     

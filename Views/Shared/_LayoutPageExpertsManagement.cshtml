@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/ExpertsManage.css" rel="stylesheet" />
+    <link type="image/x-icon" href="~/Content/images/favico.ico" rel="icon" />
+</head>
+<body>
+    <div class="top">
+        <span class="text-left">
+            今天是 @Html.Label("yyyy-MM-DD", DateTime.Today.Date.ToLongDateString())，欢迎 @if (Session["name"] != null)
+            {   @Session["name"]  }回来！
+        </span>
+        <span class="text-right">
+            <a class="btn btn-link" href="@Url.Action("ChangePassword","Backstage")" title="点击修改密码">修改密码</a>
+            <a class="btn btn-link" onclick="btnQuit(); return false;" title="点击返回首页">注销</a>
+        </span>
+    </div>
+    <div class="container-fluid">
+        <div class="div_left">
+            <ul>
+                <li><a href="@Url.Action("Index", "ExpertsManage")" title="查看专家列表"><span><img src="~/Content/images/iterm.jpg" /></span>专家信息列表</a> </li>
+                <li> <a href="@Url.Action("Add", "ExpertsManage")" title="录入专家信息"><span><img src="~/Content/images/iterm.jpg" /></span>录入专家信息</a> </li>
+                <li><a href="@Url.Action("Upload", "ExpertsManage")" title="专家相关附件上传(个人登记表、专家聘书等)"><span><img src="~/Content/images/iterm.jpg" /></span>专家附件上传</a></li>
+            </ul>
+        </div>
+        <div class="div_right">
+            @RenderBody()
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="div_footer">
+        <p>南方教育装备创新研究院&nbsp;&nbsp;版权所有 ©2018&nbsp;&nbsp;技术支持:<a href="https://weibo.com/gongjing457" target="_blank">Ryan</a> </p>
+        <p> 联系电话：0750-3299695&nbsp;&nbsp;邮箱：jyzbyjy@126.com</p>
+        <p> 地址：广东省江门市蓬江区群华路15号群华科技园5栋二层</p>
+    </div>
+</body>
+</html>
+<script>
+    function btnQuit() {
+        if (confirm("您确定要退出吗？")) {
+            $.ajax({
+                type: "POST",
+                url: "/Backstage/Quit",
+                cache: false,
+                datatype: "json",
+                success: function (res) {
+                    res = JSON.parse(res);
+                    alert(res.msg);
+                    window.location = "/EEmain/HomePage";
+                }, error: function () {
+                    alert("当前处理过中出现了异常，请联系系统管理员！" + xhr.responseText);
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,74 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.div-top {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    /*min-width: 1000px;*/
+    /*height: 200px;*/
+    background-image: url(../../Content/images/top.jpg);
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+}
+
+    .div-top .sp_title {
+        color: white;
+        font-size: 36px;
+        font-family: STXingkai;
+        float: left;
+        padding-top: 40px;
+        padding-left: 30px;
+    }
+
+    .div-top .sp_content {
+        color: white;
+        font-size: 24px;
+        font-family: STXingkai;
+        float: right;
+        margin-right: 20px;
+        padding-top: 160px;
+    }
+
+.navbar {
+    background: -webkit-linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* 标准的语法（必须放在最后） */
+}
+
+.nav li a:hover {
+    color: white !important;
+    background: #FF0000 !important;
+}
+
+.div_content {
+    padding-top: 10px;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 600px;
+}
+
+.div_footer {
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    background-color: #DCDCDC;
+}
+
+@media(max-width:767px) {
+    .div-top {
+        width: 100%;
+        height: 100px;
+        display:block;
+    }
+
+    .sp_title, .sp_content {
+        display: none;
+    }
+}

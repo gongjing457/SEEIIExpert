@@ -1,0 +1,83 @@
+﻿@model SEEIPro.Models.Expert
+@{
+    ViewBag.Title = "更改专家图像";
+    Layout = "~/Views/Shared/_LayoutPageExpertsManagement.cshtml";
+}
+
+<link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Scripts/kindeditor/themes/default/default.css" rel="stylesheet" />
+<div class="container-fluid">
+    <h3 class="text-center">更改专家 @Model.eName 图像信息</h3>
+    <div class="col-sm-6 col-md-3">
+        <div class="thumbnail text-center">
+            <p>缩略图</p>
+            <img id="imgicon" src="~/Content/images/obama.jpg" alt="暂无图片" title="图片预览" />
+        </div>
+        <div class="caption">
+            <p>注意：上传图像为小一寸像素260*378为佳，且大小不超过2M。选择图片后请点击"确认更改"，进行保存！</p>
+            <p>
+                <input class="btn btn-primary" type="button" value="选择图片" id="btnimginfo" title="点击选择图片" />
+            </p>
+            <p>
+                <input class="btn btn-danger" type="button" value="确认更改" id="btnsave" title="点击保存更改" />
+                <input class="btn btn-warning" type="button" value="取消返回" id="btnreturn" title="点击返回专家列表" />
+            </p>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/kindeditor/kindeditor-all.js"></script>
+<script src="~/Scripts/kindeditor/plugins/code/prettify.js"></script>
+<script src="~/Scripts/kindeditor/lang/zh-CN.js"></script>
+<script src="~/Scripts/kindeditor/plugins/filemanager/filemanager.js"></script>
+<script>
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.editor({
+            allowFileManager: true
+        });
+    });
+    $(function () {
+        var iconinfo;
+        $("#btnimginfo").click(function () {
+            editor.loadPlugin("filemanager", function () {
+                editor.plugin.filemanagerDialog({
+                    viewType: "VIEW",
+                    dirName: "image",
+                    clickFn: function (url, title) {
+                        $("#imgicon").attr("src", url);
+                        iconinfo = url;
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+
+        $("#btnsave").click(function () {
+            if (confirm("您确认要保存对专家图像的更改吗？")) {
+                $.ajax({
+                    type: "GET",
+                    url: "/ExpertsManage/SaveExpertImg?id=" +@Model.sId,
+                    data:{"imginfo":iconinfo},
+                    datatpe:"json",
+                    success: function (result) {
+                        result = JSON.parse(result);
+                        if (result.status == 'ok') {
+                            alert(result.msg);
+                            window.location = "/ExpertsManage/Index";
+                        }else if(result.status=="no"){
+                            alert(result.msg);
+                        } else {   alert(result.msg); }
+                    },
+                    error: function () {
+                        alert("更改过程中出现异常，请稍后重试！" );
+                    }
+                });
+            }else{return false;}
+        });
+
+        $("#btnreturn").click(function () {
+            window.location = "/ExpertsManage/Index";
+        });
+    });
+</script>

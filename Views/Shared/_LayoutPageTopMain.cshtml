@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>南方教育装备产业发展智库</title>
+    <link type="image/x-icon" rel="icon" href="~/Content/images/favico.ico" />
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
+    <link href="~/Content/css/LayoutTopmain.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function () {
+            $(".nav").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === location.pathname) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="div-top">
+        <span class="sp_title">南方教育装备产业发展智库</span>
+        <span class="sp_content">南方教育装备创新研究院  主办</span>
+    </div>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="@Url.Action("HomePage", "EEmain")">首页</a></li>
+                <li><a href="@Url.Action("About", "EEmain")">关于智库</a></li>
+                <li><a href="@Url.Action("ExpertProfile", "EEmain")">智库专家</a></li>
+                <li><a href="@Url.Action("Tools", "EEmain")">常用工具</a></li>
+            </ul>
+        </div>
+        <div><p class="navbar-text navbar-right"><a class="btn-link" href="@Url.Action("Login", "Backstage")" target="_blank">管理登陆</a> </p></div>
+    </nav>
+
+    <div class="divider"></div>
+    <div class="div_content">
+        @RenderBody()
+    </div>
+    <div class="div_footer">
+        <p>南方教育装备创新研究院&nbsp;&nbsp;版权所有 ©2018&nbsp;&nbsp;技术支持:<a href="https://weibo.com/gongjing457" target="_blank">Ryan</a> </p>
+        <p> 联系电话：0750-3299695&nbsp;&nbsp;邮箱：jyzbyjy@126.com</p>
+        <p> 地址：广东省江门市蓬江区群华路15号群华科技园5栋二层</p>
+    </div>
+</body>
+</html>

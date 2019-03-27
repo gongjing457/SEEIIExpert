@@ -1,0 +1,107 @@
+﻿body {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    /*background: #fff;*/
+}
+
+
+
+/*2018-1-12*/
+.loadingwrap {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    text-align: center;
+    font-family: 'Microsoft YaHei';
+    font-size: 16px;
+    background: white;
+}
+
+    .loadingwrap .loadinggif {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: url(../images/Pacman.gif) no-repeat center;
+    }
+
+
+
+div {
+    display: block;
+}
+
+
+header h1 {
+    display: inline;
+}
+
+    header h1 img {
+        margin: 10px 0px 0px 0px;
+        width: 352px;
+        height: 80px;
+        position: relative;
+        z-index: 999;
+        border: 0px;
+    }
+
+.wrap_tips {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    color: #FF4500;
+    font-size: 14px !important;
+    background: #F8F8FF;
+    display: block;
+}
+
+.top_wrap {
+    width: 100%;
+    border-bottom: 1px solid #b7b7b7;
+}
+
+.tab_wrap {
+    margin: 0 auto;
+    position: relative;
+    min-height: 100px;
+    width: 1500px;
+    z-index: 999;
+}
+
+header nav {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -29px;
+    height: 58px;
+    line-height: 58px;
+    display: block;
+}
+
+#page {
+    width: 100%;
+    /*background: #f7f7f7 none repeat center top;*/
+    overflow: hidden;
+}
+
+
+.main {
+    width: 100%;
+    min-height: 580px;
+}
+
+
+.hp_divfoot {
+    padding: 20px;
+    text-align: center;
+    background-color: #8d9095;
+}

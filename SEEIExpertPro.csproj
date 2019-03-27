@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{85EA6680-3E51-407E-9366-6C2654862699}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SEEIPro</RootNamespace>
+    <AssemblyName>SEEIPro</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.1.3\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NPOI 2.2.1 binary package\Release\Net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.barcodes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.forms, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.io, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.io.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.kernel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.layout.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.pdfa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.sign.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.styledxmlparser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.svg, Version=7.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.1.5\lib\net40\itext.svg.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LitJSON, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\LitJson.0.12.0\lib\net45\LitJSON.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NPOI 2.2.1 binary package\Release\Net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NPOI 2.2.1 binary package\Release\Net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NPOI 2.2.1 binary package\Release\Net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NPOI 2.2.1 binary package\Release\Net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ExpertsManageController.cs" />
+    <Compile Include="Controllers\BackstageController.cs" />
+    <Compile Include="Controllers\EEmainController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Department.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Document.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Expert.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExpertBankInfo.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExpertExperience.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FeedBack.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Job.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Leave.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\News.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OverTime.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartnerSchool.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Privilege.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SeeiiExpertDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SeeiiExpertDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SeeiiExpertDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SeeiiExpertDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SeeiiExpertDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Staff.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StorageStatu.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UnitProperty.cs">
+      <DependentUpon>SeeiiExpertDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\AuthorizationActionFilter.cs" />
+    <Compile Include="Utils\ExpertInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\LoginAuthorizationActionFilterAttribute.cs" />
+    <Compile Include="Utils\ExcelUtil.cs" />
+    <Compile Include="Utils\FileManager.cs" />
+    <Compile Include="Utils\LoginModel.cs" />
+    <Compile Include="Utils\RSAEncryption.cs" />
+    <Compile Include="Utils\RSASecurity.cs" />
+    <Compile Include="Utils\ValidateImgCode.ashx.cs">
+      <DependentUpon>ValidateImgCode.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\LitJSON.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\NPOI.dll" />
+    <Content Include="bin\NPOI.OOXML.dll" />
+    <Content Include="bin\NPOI.OpenXml4Net.dll" />
+    <Content Include="bin\NPOI.OpenXmlFormats.dll" />
+    <Content Include="bin\PagedList.dll" />
+    <Content Include="bin\PagedList.Mvc.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Providers.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\css\AddExperts.css" />
+    <Content Include="Content\css\base.css" />
+    <Content Include="Content\css\Common.css" />
+    <Content Include="Content\css\LayoutTopmain.css" />
+    <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\ExpertsManage.css" />
+    <Content Include="Content\css\MainPage.css" />
+    <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\panelbase.css" />
+    <Content Include="Content\images\favico.ico" />
+    <Content Include="Content\images\iterm.jpg" />
+    <Content Include="Content\images\load.gif" />
+    <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\magnify.png" />
+    <Content Include="Content\images\mid-bar.jpg" />
+    <Content Include="Content\images\obama.jpg" />
+    <Content Include="Content\images\operation.png" />
+    <Content Include="Content\images\Pacman.gif" />
+    <Content Include="Content\images\plus.png" />
+    <Content Include="Content\images\sprite-navigator.png" />
+    <Content Include="Content\images\top.jpg" />
+    <Content Include="Content\images\uploadify-cancel.png" />
+    <Content Include="Content\images\weixin.jpg" />
+    <Content Include="Content\css\PagedList.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\xiaoyicun\eal.jpg" />
+    <Content Include="Content\xiaoyicun\eczx.jpg" />
+    <Content Include="Content\xiaoyicun\eljb.jpg" />
+    <Content Include="Content\xiaoyicun\eljk.jpg" />
+    <Content Include="Content\xiaoyicun\ephg.jpg" />
+    <Content Include="Content\xiaoyicun\eyhw.jpg" />
+    <Content Include="Content\xiaoyicun\eyxw.jpg" />
+    <Content Include="Content\xiaoyicun\ezjz.jpg" />
+    <Content Include="Content\xiaoyicun\obama.jpg" />
+    <Content Include="ExpertFiles\Icons\image\20180320\20180320155235_3730.jpg" />
+    <Content Include="Global.asax" />
+    <Content Include="license.txt" />
+    <Content Include="Models\SeeiiExpertDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SeeiiExpertDB.edmx</DependentUpon>
+      <LastGenOutput>SeeiiExpertDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SeeiiExpertDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SeeiiExpertDB.edmx</DependentUpon>
+      <LastGenOutput>SeeiiExpertDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\Barrett.js" />
+    <Content Include="Scripts\BigInt.js" />
+    <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <EntityDeploy Include="Models\SeeiiExpertDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SeeiiExpertDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SeeiiExpertDB.edmx.diagram">
+      <DependentUpon>SeeiiExpertDB.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\addexpert.js" />
+    <Content Include="Scripts\bootstrap\js\bootstrap-modal.js" />
+    <Content Include="Scripts\bootstrap\js\jquery-2.0.0.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\kindeditor\asp.net\bin\LitJSON.dll" />
+    <Content Include="Scripts\kindeditor\asp.net\README.txt" />
+    <Content Include="Scripts\kindeditor\attached\image\20180105\20180105110104_1189.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180116\20180116100806_9443.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180116\20180116112822_4127.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117110049_5713.png" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117110429_1649.png" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117111322_0114.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117111625_3229.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117111934_3807.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117112315_5603.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117112731_5310.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117112943_4775.png" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117113229_9420.png" />
+    <Content Include="Scripts\kindeditor\attached\image\20180117\20180117230920_3220.jpg" />
+    <Content Include="Scripts\kindeditor\attached\image\20180119\20180119113101_9882.jpg" />
+    <Content Include="Scripts\kindeditor\kindeditor-all-min.js" />
+    <Content Include="Scripts\kindeditor\kindeditor-all.js" />
+    <Content Include="Scripts\kindeditor\lang\ar.js" />
+    <Content Include="Scripts\kindeditor\lang\en.js" />
+    <Content Include="Scripts\kindeditor\lang\ko.js" />
+    <Content Include="Scripts\kindeditor\lang\ru.js" />
+    <Content Include="Scripts\kindeditor\lang\zh-CN.js" />
+    <Content Include="Scripts\kindeditor\lang\zh-TW.js" />
+    <Content Include="Scripts\kindeditor\license.txt" />
+    <Content Include="Scripts\kindeditor\plugins\anchor\anchor.js" />
+    <Content Include="Scripts\kindeditor\plugins\autoheight\autoheight.js" />
+    <Content Include="Scripts\kindeditor\plugins\baidumap\baidumap.js" />
+    <Content Include="Scripts\kindeditor\plugins\baidumap\index.html" />
+    <Content Include="Scripts\kindeditor\plugins\baidumap\map.html" />
+    <Content Include="Scripts\kindeditor\plugins\clearhtml\clearhtml.js" />
+    <Content Include="Scripts\kindeditor\plugins\code\code.js" />
+    <Content Include="Scripts\kindeditor\plugins\code\prettify.css" />
+    <Content Include="Scripts\kindeditor\plugins\code\prettify.js" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\emoticons.js" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\0.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\1.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\10.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\100.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\101.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\102.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\103.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\104.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\105.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\106.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\107.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\108.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\109.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\11.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\110.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\111.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\112.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\113.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\114.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\115.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\116.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\117.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\118.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\119.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\12.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\120.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\121.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\122.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\123.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\124.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\125.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\126.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\127.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\128.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\129.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\13.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\130.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\131.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\132.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\133.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\134.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\14.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\15.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\16.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\17.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\18.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\19.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\2.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\20.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\21.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\22.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\23.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\24.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\25.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\26.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\27.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\28.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\29.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\3.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\30.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\31.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\32.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\33.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\34.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\35.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\36.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\37.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\38.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\39.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\4.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\40.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\41.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\42.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\43.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\44.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\45.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\46.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\47.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\48.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\49.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\5.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\50.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\51.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\52.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\53.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\54.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\55.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\56.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\57.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\58.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\59.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\6.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\60.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\61.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\62.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\63.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\64.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\65.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\66.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\67.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\68.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\69.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\7.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\70.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\71.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\72.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\73.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\74.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\75.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\76.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\77.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\78.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\79.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\8.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\80.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\81.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\82.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\83.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\84.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\85.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\86.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\87.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\88.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\89.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\9.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\90.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\91.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\92.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\93.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\94.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\95.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\96.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\97.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\98.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\99.gif" />
+    <Content Include="Scripts\kindeditor\plugins\emoticons\images\static.gif" />
+    <Content Include="Scripts\kindeditor\plugins\filemanager\filemanager.js" />
+    <Content Include="Scripts\kindeditor\plugins\filemanager\images\file-16.gif" />
+    <Content Include="Scripts\kindeditor\plugins\filemanager\images\file-64.gif" />
+    <Content Include="Scripts\kindeditor\plugins\filemanager\images\folder-16.gif" />
+    <Content Include="Scripts\kindeditor\plugins\filemanager\images\folder-64.gif" />
+    <Content Include="Scripts\kindeditor\plugins\filemanager\images\go-up.gif" />
+    <Content Include="Scripts\kindeditor\plugins\fixtoolbar\fixtoolbar.js" />
+    <Content Include="Scripts\kindeditor\plugins\flash\flash.js" />
+    <Content Include="Scripts\kindeditor\plugins\image\image.js" />
+    <Content Include="Scripts\kindeditor\plugins\image\images\align_left.gif" />
+    <Content Include="Scripts\kindeditor\plugins\image\images\align_right.gif" />
+    <Content Include="Scripts\kindeditor\plugins\image\images\align_top.gif" />
+    <Content Include="Scripts\kindeditor\plugins\image\images\refresh.png" />
+    <Content Include="Scripts\kindeditor\plugins\insertfile\insertfile.js" />
+    <Content Include="Scripts\kindeditor\plugins\lineheight\lineheight.js" />
+    <Content Include="Scripts\kindeditor\plugins\link\link.js" />
+    <Content Include="Scripts\kindeditor\plugins\map\map.html" />
+    <Content Include="Scripts\kindeditor\plugins\map\map.js" />
+    <Content Include="Scripts\kindeditor\plugins\media\media.js" />
+    <Content Include="Scripts\kindeditor\plugins\multiimage\images\image.png" />
+    <Content Include="Scripts\kindeditor\plugins\multiimage\images\select-files-en.png" />
+    <Content Include="Scripts\kindeditor\plugins\multiimage\images\select-files-zh-CN.png" />
+    <Content Include="Scripts\kindeditor\plugins\multiimage\images\swfupload.swf" />
+    <Content Include="Scripts\kindeditor\plugins\multiimage\multiimage.js" />
+    <Content Include="Scripts\kindeditor\plugins\pagebreak\pagebreak.js" />
+    <Content Include="Scripts\kindeditor\plugins\plainpaste\plainpaste.js" />
+    <Content Include="Scripts\kindeditor\plugins\preview\preview.js" />
+    <Content Include="Scripts\kindeditor\plugins\quickformat\quickformat.js" />
+    <Content Include="Scripts\kindeditor\plugins\table\table.js" />
+    <Content Include="Scripts\kindeditor\plugins\template\html\1.html" />
+    <Content Include="Scripts\kindeditor\plugins\template\html\2.html" />
+    <Content Include="Scripts\kindeditor\plugins\template\html\3.html" />
+    <Content Include="Scripts\kindeditor\plugins\template\template.js" />
+    <Content Include="Scripts\kindeditor\plugins\wordpaste\wordpaste.js" />
+    <Content Include="Scripts\kindeditor\themes\common\anchor.gif" />
+    <Content Include="Scripts\kindeditor\themes\common\blank.gif" />
+    <Content Include="Scripts\kindeditor\themes\common\flash.gif" />
+    <Content Include="Scripts\kindeditor\themes\common\loading.gif" />
+    <Content Include="Scripts\kindeditor\themes\common\media.gif" />
+    <Content Include="Scripts\kindeditor\themes\common\rm.gif" />
+    <Content Include="Scripts\kindeditor\themes\default\background.png" />
+    <Content Include="Scripts\kindeditor\themes\default\default.css" />
+    <Content Include="Scripts\kindeditor\themes\default\default.png" />
+    <Content Include="Scripts\kindeditor\themes\qq\editor.gif" />
+    <Content Include="Scripts\kindeditor\themes\qq\qq.css" />
+    <Content Include="Scripts\kindeditor\themes\simple\simple.css" />
+    <Content Include="Scripts\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
+    <Content Include="Scripts\RSA.js" />
+    <None Include="Properties\PublishProfiles\SeeiExperts.pubxml" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\Font-Awesome\font\fontawesome-webfont.eot" />
+    <Content Include="Scripts\Font-Awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\Font-Awesome\font\fontawesome-webfont.woff" />
+    <Content Include="Scripts\Font-Awesome\font\FontAwesome.otf" />
+    <Content Include="Scripts\Font-Awesome\less\bootstrap.less" />
+    <Content Include="Scripts\Font-Awesome\less\core.less" />
+    <Content Include="Scripts\Font-Awesome\less\extras.less" />
+    <Content Include="Scripts\Font-Awesome\less\font-awesome-ie7.less" />
+    <Content Include="Scripts\Font-Awesome\less\font-awesome.less" />
+    <Content Include="Scripts\Font-Awesome\less\icons.less" />
+    <Content Include="Scripts\Font-Awesome\less\mixins.less" />
+    <Content Include="Scripts\Font-Awesome\less\path.less" />
+    <Content Include="Scripts\Font-Awesome\less\variables.less" />
+    <Content Include="Scripts\Font-Awesome\scss\font-awesome-ie7.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\font-awesome.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\_bootstrap.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\_core.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\_extras.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\_icons.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\_mixins.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\_path.scss" />
+    <Content Include="Scripts\Font-Awesome\scss\_variables.scss" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\js\npm.js" />
+    <Content Include="Scripts\Font-Awesome\css\font-awesome-ie7.css" />
+    <Content Include="Scripts\Font-Awesome\css\font-awesome-ie7.min.css" />
+    <Content Include="Scripts\Font-Awesome\css\font-awesome.css" />
+    <Content Include="Scripts\Font-Awesome\css\font-awesome.min.css" />
+    <Content Include="Scripts\Font-Awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.zoom.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\readme.txt" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Utils\PrivateKey.xml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Backstage\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageExpertsManagement.cshtml" />
+    <Content Include="Views\ExpertsManage\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageTopMain.cshtml" />
+    <Content Include="Views\EEmain\ExpertProfile.cshtml" />
+    <Content Include="Views\EEmain\HomePage.cshtml" />
+    <Content Include="Views\ExpertsManage\Edit.cshtml" />
+    <Content Include="Views\ExpertsManage\Upload.cshtml" />
+    <Content Include="Scripts\kindeditor\upload\file_manager_json.ashx" />
+    <Content Include="Scripts\kindeditor\upload\upload_json.ashx" />
+    <Content Include="Utils\ValidateImgCode.ashx" />
+    <Content Include="Views\ExpertsManage\Add.cshtml" />
+    <Content Include="Views\ExpertsManage\Photo.cshtml" />
+    <Content Include="Views\Backstage\ChangePassword.cshtml" />
+    <Content Include="Views\ExpertsManage\Details.cshtml" />
+    <Content Include="Views\EEmain\About.cshtml" />
+    <Content Include="Views\EEmain\Tools.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="bin\zh-Hans\" />
+    <Folder Include="ExpertFiles\Appointment\" />
+    <Folder Include="ExpertFiles\Registration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10127</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10127/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
