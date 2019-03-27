@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>南方教育装备产业发展智库</title>
+	<link type="image/x-icon" rel="icon" href="http://expert.seeii.org/Content/images/favico.ico" /> 
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> 
+	<style type="text/css">
+	body {
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+	}
+
+	.div-top {
+		margin: 0 auto;
+		width: 100%;
+		height: 100%;
+		/*min-width: 1000px;*/
+		/*height: 200px;*/
+		background-image: url(http://expert.seeii.org/Content/images/top.jpg);
+		background-size: cover;
+		background-position: center center;
+		overflow: hidden;
+	}
+
+	.div-top .sp_title {
+		color: white;
+		font-size: 36px;
+		font-family: STXingkai;
+		float: left;
+		padding-top: 40px;
+		padding-left: 30px;
+	}
+
+	.div-top .sp_content {
+		color: white;
+		font-size: 24px;
+		font-family: STXingkai;
+		float: right;
+		margin-right: 20px;
+		padding-top: 160px;
+	}
+
+	.navbar {
+		background: -webkit-linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* Firefox 3.6 - 15 */
+		background: linear-gradient(#BEBEBE, #F8F8FF, #BEBEBE); /* 标准的语法（必须放在最后） */
+	}
+
+	.nav li a:hover {
+		color: white !important;
+		background: #FF0000 !important;
+	}
+
+	.div_content {
+		padding-top: 10px;
+		margin: 0 auto;
+		width: 100%;
+		min-height: 600px;
+	}
+
+	.div_footer {
+		padding: 15px;
+		text-align: center;
+		width: 100%;
+		font-size: 12px;
+		background-color: #DCDCDC;
+	}
+
+	@media(max-width:767px) {
+		.div-top {
+			width: 100%;
+			height: 100px;
+			display:block;
+		}
+
+		.sp_title, .sp_content {
+			display: none;
+		}
+	} 
+	.accordion-toggle, .list-unstyled li a {
+		color: black;
+		text-decoration: none;
+	}
+
+	.accordion-heading {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.list-group-item:hover {
+		background-color: #DBDBDB !important;
+	} 
+</style>
+<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$(function () {
+		$(".nav").find("li").each(function () {
+			var a = $(this).find("a:first")[0];
+			if ($(a).attr("href") === location.pathname) {
+				$(this).addClass("active");
+			} else {
+				$(this).removeClass("active");
+			}
+		});
+	});
+</script>
+</head>
+
+<body>
+	<div class="div-top">
+		<span class="sp_title">南方教育装备产业发展智库</span>
+		<span class="sp_content">南方教育装备创新研究院  主办</span>
+	</div>
+
+	<nav class="navbar navbar-default" role="navigation">
+		<div>
+			<ul class="nav navbar-nav">
+				<li><a href="#">首页</a></li>
+				<li><a href="#">关于智库</a></li>
+				<li><a href="#">智库专家</a></li>
+				<li class="active"><a href="#">常用工具</a></li>
+			</ul>
+		</div>
+		<div><p class="navbar-text navbar-right"><a class="btn-link" href="#" target="_blank">管理登陆</a> </p></div>
+	</nav>
+
+	<div class="divider"></div>
+	<div class="div_content">
+		
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="accordion" id="accordion-001">
+								<div class="accordion-group">
+									<div class="accordion-heading">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-001" href="#accordion-element-001"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;图片操作类</a>
+									</div>
+									<div id="accordion-element-001" class="accordion-body in collapse">
+										<div class="accordion-inner">
+											<div class="list-group">
+												<a href="http://bigjpg.com/" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-random"></span>  AI人工智能图片无损放大</h4>
+													<p class="list-group-item-text">人工智能深度学习技术——深度卷积神经网络（Deep Convolutional Neural Networks, based on waifu2x）。它会将噪点和锯齿的部分进行补充，实现图片的无损放大。目前可以上传3000x3000分辨率、10MB以下的图片。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="http://www.aigei.com/bgremover" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-camera"></span>  图片去底工具</h4>
+													<p class="list-group-item-text">使用BgRemover图片去底工具将“纯色背景的图片”再次还原成“透明背景的图片”。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="http://www.gaitubao.com/" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-erase"></span>  改图宝</h4>
+													<p class="list-group-item-text">在线修改照片像素及尺寸、裁剪、压缩文件大小及处理各类考试网上报名照片及证件照。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="http://www.gaitubao.com/yinzhang/" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-pawn"></span>  在线生成个性印章</h4>
+													<p class="list-group-item-text">可以在线生成不同风格、不同字体的个性印章，如需设计商业长方形印章、广告章、水印章。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="https://clippingmagic.com/" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-scissors"></span>  Clipping Magic图像去背景</h4>
+													<p class="list-group-item-text">由一家总部设在明尼阿波利斯地区的小规模公司开发专门帮助您尽快和尽量便利地删除图像背景的网站。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="https://qrpay.uomg.com/" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-qrcode"></span>  三合一收款码生成</h4>
+													<p class="list-group-item-text">支付宝、微信、手机QQ三合一收款码生成。</p>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="accordion" id="accordion-002">
+								<div class="accordion-group">
+									<div class="accordion-heading">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-002" href="#accordion-element-011"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;文件操作类</a>
+									</div>
+									<div id="accordion-element-011" class="accordion-body in collapse">
+										<div class="accordion-inner">
+											<div class="list-group">
+												<a href="https://www.ilovepdf.com/zh-cn" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-duplicate"></span>  PDF文件在线管理工具</h4>
+													<p class="list-group-item-text">完全免费的PDF文件在线管理工具，其功能包括：合并PDF文件、拆分PDF文件、压缩PDF文件、Office文件转换为PDF文件、PDF文件转换为JPG图片、JPG图片转换为PDF文件。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="http://www.pdfdo.com/pdf-add-watermark.aspx" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-paperclip"></span>  PDF添加文字和图片水印</h4>
+													<p class="list-group-item-text">能快速方便的给PDF文件添加水印生成新的文件，简单、高效；一键操作，快速、方便。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="http://www.alltoall.net/" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-transfer"></span>  ALL TO ALL在线文件转换</h4>
+													<p class="list-group-item-text">凹凸凹(www.alltoall.net)是中国最全面的格式转换平台。支持约200多种格式的文件转换，包括：视频、音频、图片、字体等多媒体文件，以及常见的office文件、PDF、电子书等文档。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="http://ebuymed.cn/" target="_blank" class="list-group-item" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cloud-download"></span>  百度文库免费下载</h4>
+													<p class="list-group-item-text">百度文库是百度发布的供网友在线分享文档的大型平台，在百度文库里我们常能找到自己所需要的文档，但很多文档下载需要下载券。这里提供常用的百度文库免费下载方法，教您如何不费力地免费下载百度文库内容。</p>
+												</a>
+											</div>
+											<div class="list-group">
+												<a href="http://iscute.cn/" class="list-group-item" target="_blank" title="点击即可前往第三方体验！">
+													<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-share"></span>  CuteHttpFileServer局域网文件共享服务器</h4>
+													<p class="list-group-item-text">CuteHttpFileServer/chfs是一个免费的、HTTP协议的文件共享服务器，使用浏览器可以快速访问。</p>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="accordion" id="accordion-003">
+								<div class="accordion-group">
+									<div class="accordion-heading">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-003" href="#accordion-element-021"><span class="glyphicon glyphicon-hd-video"></span>&nbsp;&nbsp;音视频操作类</a>
+									</div>
+									<div id="accordion-element-021" class="accordion-body in collapse">
+										<div class="accordion-inner">
+											<div class="list-group">
+												<a href="https://weibomiaopai.com/" target="_blank" class="list-group-item" title="点击前往第三方体验！">
+													<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-hourglass"></span>  微博秒拍视频解析下载</h4>
+													<p class="list-group-item-text">本软件提供了在线的新浪微博视频、秒拍、腾讯视频、土豆、TED、乐视、PPTV、优酷等视频下载解析转存强大利器。当然不局限于上面说的几个视频网站。</p>
+												</a>
+												<div class="list-group">
+													<a href="https://www.weibovideo.com/" target="_blank" class="list-group-item" title="点击前往第三方体验！">
+														<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-film"></span>  微博视频解析下载</h4>
+														<p class="list-group-item-text">微博视频下载，秒拍视频下载。</p>
+													</a>
+												</div><div class="list-group">
+													<a href="http://mv.688ing.com/" class="list-group-item" target="_blank" title="点击前往第三方体验！">
+														<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-sunglasses"></span>  牛巴巴vip解析</h4>
+														<p class="list-group-item-text">牛巴巴vip解析旨在为网友提供免费的vip视频解析服务，让大家不花钱就能观看各大视频网站的收费视频。目前支持腾讯vip解析,爱奇艺vip解析,芒果会员解析,搜狐vip解析,pptv会员解析,优酷vip解析等。</p>
+													</a>
+												</div>
+												<div class="list-group">
+													<a href="http://ocrmaker.com/" target="_blank" class="list-group-item" title="点击前往第三方体验！">
+														<h4 class="list-group-item-heading"> <span class="glyphicon glyphicon-headphones"></span>  在线OCR服务－OCRMaker</h4>
+														<p class="list-group-item-text">OCRMker Online 通过使用光学字符识别（OCR）技术将文本文档的扫描或（智能手机）图像转换为可编辑文件。我们的在线OCR服务可以免费使用,只需上传您的图像文件。</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="div_footer">
+		<p>南方教育装备创新研究院&nbsp;&nbsp;版权所有 ©2018&nbsp;&nbsp;技术支持:<a href="https://weibo.com/gongjing457" target="_blank">Ryan</a> </p>
+		<p> 联系电话：0750-3299695&nbsp;&nbsp;邮箱：jyzbyjy@126.com</p>
+		<p> 地址：广东省江门市蓬江区群华路15号群华科技园5栋二层</p>
+	</div>
+	
+</body>
+</html>
